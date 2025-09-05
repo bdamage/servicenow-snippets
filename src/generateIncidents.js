@@ -1,9 +1,11 @@
 
 var SIMULATE = true;  //No insert of new record - FALSE to check no missing references to inserting new records
 var RESOLVED_ONLY = true;     //enable this for creating records for Task Intelligence / Predictive Intelligence
+const USE_WORKFLOW = false;  //trigger SLA's and business rules - this will slow down the generation.
+
 var NUMBER_OF_INCIDENTS = 20;
 var MAX_MAJOR_INCIDENTS = 1;
-var MAX_DAYS_BACK_IN_TIME = 34;
+var MAX_DAYS_BACK_IN_TIME = 64;
 var MAX_OPEN_DAYS = 14;
 var short_desc = [];
 var assign = [];
@@ -109,7 +111,7 @@ for (var i = 0; i < NUMBER_OF_INCIDENTS; i++) {
     idx = Math.floor(Math.random() * record.length);
     rec = record[idx];
     var newRecord = new GlideRecord('incident');
-    newRecord.setWorkflow(false); //skip business rules and notifications
+    newRecord.setWorkflow(USE_WORKFLOW); //skip business rules and notifications
     //   newRecord.autoSysFields(false);
     //newRecord.initialize();  //slow
     newRecord.newRecord();     // fast
