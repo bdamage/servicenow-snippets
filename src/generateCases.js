@@ -77,7 +77,7 @@ for (var i = 0; i < NUMBER_OF_INCIDENTS; i++) {
     records.assigned_to = agent[Math.floor(Math.random() * agent.length)];
 
     records.comments = "Thank you for contacting the support desk. Could you please provide the support contract number for us?";
-    records.work_notes = "While waiting for the contract number, I have contactec level 2 support desk for instance check and if there any issue related to customer server instance.";
+    records.work_notes = "While waiting for the contract number, I have contacted level 2 support desk for instance check and if there any issue related to customer server instance.";
 
     //CSM specific
     records.account = account[0];
