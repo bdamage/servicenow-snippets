@@ -1,7 +1,7 @@
 
-var SIMULATE = false;  //No insert of new record - FALSE to check no missing references to inserting new records
+var SIMULATE = true;  //No insert of new record - FALSE to check no missing references to inserting new records
 var RESOLVED_ONLY = true;     //enable this for creating records for Task Intelligence / Predictive Intelligence
-var NUMBER_OF_INCIDENTS = 2000;
+var NUMBER_OF_INCIDENTS = 20;
 var MAX_MAJOR_INCIDENTS = 1;
 var MAX_DAYS_BACK_IN_TIME = 34;
 var MAX_OPEN_DAYS = 14;
@@ -32,12 +32,15 @@ var admin = getRecordSysId('sys_user', 'user_name', 'admin');
 var cmdb_ci_dell = getRecordSysId('cmdb_ci', 'name', 'Dell Wireless WLAN Utility');
 var cmdb_ci_sap = getRecordSysId('cmdb_ci', 'name', 'SAP AppSRV01');
 var cmdb_ci_email = getRecordSysId('cmdb_ci', 'name', 'EXCH-SD-05');
-var cmdb_ci_computer = getRecordSysId('cmdb_ci_computer', 'name', 'Apple - MacBook Pro 15"');
+var cmdb_ci_computer = getRecordSysId('cmdb_ci_computer', 'name', 'Apple - MacBook Pro 15" for Technical Staff');
+//var cmdb_ci_computer = getRecordSysId('cmdb_ci_computer', 'name', 'Apple - MacBook Pro 15"');
 var cmdb_ci_service_email = getRecordSysId('cmdb_ci_service', 'name', 'Email');
 var cmdb_ci_service_erp = getRecordSysId('cmdb_ci_service', 'name', 'IT Services');
 var cmdb_ci_service_order = getRecordSysId('cmdb_ci_service', 'name', 'Order Status');
 var cmdb_ci_service_logistics = getRecordSysId('cmdb_ci_service', 'name', 'Logistics');
+
 var _channel = ["email", "phone", "self-service", "chat", "virtual_agent"];
+
 const record = [
     {
         short_desc: ["need access to power bi", "I want to request access to Power BI", "how do I get access to power bi?", "locked out from Logistics", "Locked out from Logistics system", "Is Logistics system down?", "Can't access to Logistics System", "no respone from logistics system", "I want access to Logistics system", "Can't access to Corporate Logistics System", "Logistics system is very slow when updating records of data"],
@@ -78,7 +81,27 @@ const record = [
         category: "software",
         assignment_group: groupSoftware,
         caller: '', agent: '', services: '', ci: cmdb_ci_computer
-    }
+    },
+    {
+        short_desc: ["Request for ERP software license", "do we have additional user license fo our ERP?"],
+        descr: ["End user can't access the ERP system software ", ""],
+        work_notes: 'Informed the user we investigating if there any known licenses issues related to ERP access.',
+        comments: 'Can you please confirm if you are running ERP client version 10.0 or newer?',
+        resolution_notes: 'End user upgraded to erp client version 10.1 and that resolved the issue.',
+        category: "software",
+        assignment_group: groupSoftware,
+        caller: '', agent: '', services: '', ci: cmdb_ci_computer
+    },
+    {
+        short_desc: ["wifi connectivity issue.", "problem with wi-fi", "wi-fi client shows an error 30012", "a error message appears wehn starting Wifi", "Wifi and error", "Wifi doesn't work", "WiFi problem", "WiFi doesn't work", "I have a WiFi 802.11ax", "no wifi signal"],
+        descr: ["User said the cable between laptop and physical newtork cabel is working. But are seeing an issue related to network. Access Points indicates all good.", ""],
+        work_notes: 'Informed the user we investigating if there any known wifi firmware issues but alsow asked for confirmation around Wifi client version.',
+        comments: 'Can you please confirm if you are running Wifi client version 2.0?',
+        resolution_notes: 'End user upgraded to wifi client version 2.6.3 and that resolved the issue.',
+        category: "software",
+        assignment_group: groupNetwork,
+        caller: '', agent: '', services: '', ci: cmdb_ci_computer
+    },
 ];
 
 
@@ -111,7 +134,7 @@ for (var i = 0; i < NUMBER_OF_INCIDENTS; i++) {
     newRecord.caller_id = (rec.caller === '') ? caller[Math.floor(Math.random() * caller.length)] : getRecordSysId('sys_user', 'user_name', rec.caller);
     newRecord.assignment_group = rec.assignment_group;
 
-    newRecord.reassignment_count = (idx % 5 == 0) ? 3 : 0;  //generate reassing data for dashboards
+    newRecord.reassignment_count = (idx % 3 == 0) ? Math.floor(Math.random() * 10) : 0;  //generate reassing data for dashboards
     newRecord.contact_type = _channel[Math.floor(Math.random() * _channel.length)];
     newRecord.assigned_to = (rec.caller === '') ? agent[Math.floor(Math.random() * agent.length)] : getRecordSysId('sys_user', 'user_name', rec.agent);
     newRecord.business_service = rec.services;
@@ -181,10 +204,3 @@ function isValidReference(reference, referenceTable) {
     var refGr = new GlideRecord(referenceTable);
     return refGr.get(reference) && refGr.isValidRecord();
 }
-
-
-
-
-
-
-
