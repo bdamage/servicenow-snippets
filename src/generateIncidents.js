@@ -77,7 +77,7 @@ const record = [
         caller: '', agent: '', services: '', ci: cmdb_ci_computer
     },
     {
-        short_desc: ["VPN connectivity issue.", "problem with VPN", "vpn client shows an error 30012", "a error message appears wehn starting VPN", "VPN and error", "vpn doesn't work", "vpn problem", "vpn doesn't work", "I have vpn 3.0"],
+        short_desc: ["VPN connectivity issue.", "problem with VPN", "vpn client shows an error 30012", "a error message appears when starting VPN", "VPN and error", "vpn doesn't work", "vpn problem", "vpn doesn't work", "I have vpn 3.0"],
         descr: ["User said the cable between network port and laptop is working but not via wifi.", "", "tried to restart laptop no success", "reinstalled same version of the vpn verison"],
         work_notes: 'Informed the user we investigating if there any known outages of VPN services but alsow asked for confirmation around VPN client version.',
         comments: 'Can you please confirm if you are running VPN client version 3.0?',
@@ -87,7 +87,7 @@ const record = [
         caller: '', agent: '', services: '', ci: cmdb_ci_computer
     },
     {
-        short_desc: ["Request for ERP software license", "do we have additional user license fo our ERP?"],
+        short_desc: ["Request for ERP software license", "do we have additional user license fo our ERP?", "our ERP system is showing blank screen"],
         descr: ["End user can't access the ERP system software ", ""],
         work_notes: 'Informed the user we investigating if there any known licenses issues related to ERP access.',
         comments: 'Can you please confirm if you are running ERP client version 10.0 or newer?',
@@ -97,8 +97,8 @@ const record = [
         caller: '', agent: '', services: '', ci: cmdb_ci_computer
     },
     {
-        short_desc: ["wifi connectivity issue.", "problem with wi-fi", "wi-fi client shows an error 30012", "a error message appears wehn starting Wifi", "Wifi and error", "Wifi doesn't work", "WiFi problem", "WiFi doesn't work", "I have a WiFi 802.11ax", "no wifi signal"],
-        descr: ["User said the cable between laptop and physical newtork cabel is working. But are seeing an issue related to network. Access Points indicates all good.", ""],
+        short_desc: ["wifi connectivity issue on my laptop.", "problem with wi-fi from my macbook", "wi-fi client shows an error no signal", "a error message pops up when starting Wifi", "Wifi and error", "Wifi doesn't work", "WiFi problem", "WiFi doesn't work", "I have a WiFi 802.11ax", "no wifi signal or low signal"],
+        descr: ["User said the cable between laptop and physical network cable is working. But are seeing an issue related to network. Access Points indicates all good.", "", "end user have restarted laptop", "end user have tried to turn of and on the wifi power in system settings"],
         work_notes: 'Informed the user we investigating if there any known wifi firmware issues but alsow asked for confirmation around Wifi client version.',
         comments: 'Can you please confirm if you are running Wifi client version 2.0?',
         resolution_notes: 'End user upgraded to wifi client version 2.6.3 and that resolved the issue.',
