@@ -30,6 +30,8 @@ agent[0] = getRecordSysId('sys_user', 'user_name', 'beth.anglin');
 agent[1] = getRecordSysId('sys_user', 'user_name', 'david.loo');
 agent[2] = getRecordSysId('sys_user', 'user_name', 'laxmi.analyst');
 agent[3] = getRecordSysId('sys_user', 'user_name', 'amelia.bryant');
+agent[4] = getRecordSysId('sys_user', 'user_name', 'admin');
+
 var admin = getRecordSysId('sys_user', 'user_name', 'admin');
 var cmdb_ci_dell = getRecordSysId('cmdb_ci', 'name', 'Dell Wireless WLAN Utility');
 var cmdb_ci_sap = getRecordSysId('cmdb_ci', 'name', 'SAP AppSRV01');
@@ -76,7 +78,7 @@ const record = [
     },
     {
         short_desc: ["VPN connectivity issue.", "problem with VPN", "vpn client shows an error 30012", "a error message appears wehn starting VPN", "VPN and error", "vpn doesn't work", "vpn problem", "vpn doesn't work", "I have vpn 3.0"],
-        descr: ["User said the cable between laptop and screen is old.", ""],
+        descr: ["User said the cable between network port and laptop is working but not via wifi.", "", "tried to restart laptop no success", "reinstalled same version of the vpn verison"],
         work_notes: 'Informed the user we investigating if there any known outages of VPN services but alsow asked for confirmation around VPN client version.',
         comments: 'Can you please confirm if you are running VPN client version 3.0?',
         resolution_notes: 'End user upgraded to VPN client version 3.1 and that resolved the issue.',
