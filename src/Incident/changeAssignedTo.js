@@ -6,26 +6,27 @@ var originalAssigneeSysId = '46d44a23a9fe19810012d100cca80666'; // Replace with 
 var newAssigneeSysId = '85c11d65dba254501eebd514ca961933';    // Replace with new assignee's name
 
 
+// Get the sys_id of the new assignee
+var oldUserGR = new GlideRecord('sys_user');
+oldUserGR.addQuery('name', originalAssignee);
+oldUserGR.query();
 
 // Get the sys_id of the new assignee
 var newUserGR = new GlideRecord('sys_user');
 newUserGR.addQuery('name', newAssignee);
 newUserGR.query();
 
-// Get the sys_id of the new assignee
-var oldUserGR = new GlideRecord('sys_user');
-oldUserGR.addQuery('name', originalAssignee);
-oldUserGR.query();
+if (oldUserGR.next() && newUserGR.next()) {
 
-var oldUserSysId = oldUserGR.getValue('sys_id');
-
-
-if (newUserGR.next()) {
+    var oldUserSysId = oldUserGR.getValue('sys_id');
+    var newUserSysId = newUserGR.getValue('sys_id');
 
     // Query incidents assigned to the original assignee
     var incidentGR = new GlideRecord('incident');
     //  incidentGR.addQuery('assigned_to.name', originalAssignee);
     incidentGR.addQuery('assigned_to', originalAssigneeSysId);
+    incidentGR.addQuery('state', '!=', 6); // Exclude Resolved
+    incidentGR.addQuery('state', '!=', 7); // Exclude Closed
     incidentGR.query();
 
     var count = 0;
