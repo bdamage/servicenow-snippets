@@ -12,8 +12,15 @@ var newUserGR = new GlideRecord('sys_user');
 newUserGR.addQuery('name', newAssignee);
 newUserGR.query();
 
+// Get the sys_id of the new assignee
+var oldUserGR = new GlideRecord('sys_user');
+oldUserGR.addQuery('name', originalAssignee);
+oldUserGR.query();
+
+var oldUserSysId = oldUserGR.getValue('sys_id');
+
+
 if (newUserGR.next()) {
-    var newUserSysId = newUserGR.getValue('sys_id');
 
     // Query incidents assigned to the original assignee
     var incidentGR = new GlideRecord('incident');
