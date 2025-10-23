@@ -2,7 +2,7 @@
 var originalAssignee = 'Beth Anglin'; // Replace with current assignee's name
 var newAssignee = 'Laxmi Analyst';    // Replace with new assignee's name
 
-var originalAssigneeSysId = '46d44a23a9fe19810012d100cca80666'; // Replace with current assignee's name
+var originalAssigneeSysId = ''; // Replace with current assignee's name
 var newAssigneeSysId = '85c11d65dba254501eebd514ca961933';    // Replace with new assignee's name
 
 
