@@ -1,3 +1,16 @@
+/*
+* Generate Incident Records with random data for testing and demo purposes
+* 
+* Kjell Lloyd 2024 - Servicenow-Snippets
+*
+* Instructions:
+* 1. Adjust the NUMBER_OF_INCIDENTS variable to set how many incidents to create
+* 2. Set SIMULATE to false to actually insert records into the database
+* 3. Run the script in a background script or script include context
+*
+* Note: This script is intended for use in a development or testing environment only.
+*       Do not run in production as it will create a large number of records.
+*/
 
 var SIMULATE = true;  //No insert of new record - FALSE to check no missing references to inserting new records
 var RESOLVED_ONLY = true;     //enable this for creating records for Task Intelligence / Predictive Intelligence
@@ -12,7 +25,8 @@ var assign = [];
 var caller = [];
 var agent = [];
 var category = [];
-//Cache for faster loopkup
+
+//Cache for faster lookup
 const groupServiceDesk = getRecordSysId('sys_user_group', 'name', 'Service Desk');
 
 
@@ -149,6 +163,7 @@ for (var i = 0; i < NUMBER_OF_INCIDENTS; i++) {
 
     newRecord.impact = Math.floor(Math.random() * 3) + 1;
     newRecord.urgency = Math.floor(Math.random() * 3) + 1;
+
     //If state is Resolved or Closed update record data
     if (newRecord.state >= 6) {
         // setIncidentToResolvedClosed(newRecord,gdt,days);
@@ -176,7 +191,7 @@ for (var i = 0; i < NUMBER_OF_INCIDENTS; i++) {
 function setIncidentToResolvedClosed(_rec, gdt, days) {
     var closedays = -1;
     //if(days>=MAX_SPAN_OPEN_DAYS) { //10 days in past lets randomize close day
-    closedays = Math.floor(Math.random() * (days % MAX_OPEN_DAYS)) % MAX_DAYS_BACK_IN_TIME;  //max 15 days
+    closedays = Math.floor(Math.random() * (days % MAX_OPEN_DAYS)) % MAX_DAYS_BACK_IN_TIME;  //max MAX_DAYS_BACK_IN_TIME days
     closeDate = gdt;  //update close date 
     closeDate.addDaysUTC(closedays);
     //}
