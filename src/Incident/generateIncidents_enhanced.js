@@ -1110,7 +1110,14 @@ function setIncidentToResolvedClosed(_rec, recTemplate, gdt, days) {
     _rec.resolved_at = closeDate.getDisplayValue();
 
     // Randomly select close code from available options
-    var closeCodes = Object.values(CLOSE_CODE);
+    var closeCodes = [
+        CLOSE_CODE.SOLVED,
+        CLOSE_CODE.SOLVED_PERMANENTLY,
+        CLOSE_CODE.SOLVED_REMOTELY,
+        CLOSE_CODE.NOT_SOLVED,
+        CLOSE_CODE.NOT_SOLVED_TOO_COSTLY,
+        CLOSE_CODE.CLOSED_BY_CALLER
+    ];
     _rec.close_code = closeCodes[Math.floor(Math.random() * closeCodes.length)];
 
     // Use resolution notes from template if available
