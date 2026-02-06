@@ -119,22 +119,22 @@
     gs.info('\n--- Creating Business Capabilities ---');
 
     var capabilities = {
-        customerOnboarding: upsertRecord('business_capability', {
+        customerOnboarding: upsertRecord('cmdb_ci_business_capability', {
             name: 'Customer Onboarding',
             short_description: 'End-to-end customer onboarding and account setup',
             operational_status: '1' // Operational
         }),
-        orderManagement: upsertRecord('business_capability', {
+        orderManagement: upsertRecord('cmdb_ci_business_capability', {
             name: 'Order Management',
             short_description: 'Order processing, fulfillment, and tracking',
             operational_status: '1'
         }),
-        billingPayments: upsertRecord('business_capability', {
+        billingPayments: upsertRecord('cmdb_ci_business_capability', {
             name: 'Billing & Payments',
             short_description: 'Invoice generation, payment processing, and revenue recognition',
             operational_status: '1'
         }),
-        customerSupport: upsertRecord('business_capability', {
+        customerSupport: upsertRecord('cmdb_ci_business_capability', {
             name: 'Customer Support',
             short_description: 'Customer service, ticketing, and issue resolution',
             operational_status: '1'
@@ -142,28 +142,25 @@
     };
 
     // ------------------------------------------------------------------------
-    // 2. DIGITAL PRODUCTS
+    // 2. BUSINESS APPLICATIONS (replaces Digital Products in some CSDM versions)
     // ------------------------------------------------------------------------
-    gs.info('\n--- Creating Digital Products ---');
+    gs.info('\n--- Creating Business Applications ---');
 
     var digitalProducts = {
-        customerPortal: upsertRecord('cmdb_ci_product', {
+        customerPortal: upsertRecord('cmdb_ci_business_app', {
             name: 'Neat Customer Portal',
             short_description: 'Self-service portal for customer account management and orders',
-            operational_status: '1',
-            product_type: 'digital_product'
+            operational_status: '1'
         }),
-        billing: upsertRecord('cmdb_ci_product', {
+        billing: upsertRecord('cmdb_ci_business_app', {
             name: 'Neat Billing',
             short_description: 'Billing engine and payment processing platform',
-            operational_status: '1',
-            product_type: 'digital_product'
+            operational_status: '1'
         }),
-        supportConsole: upsertRecord('cmdb_ci_product', {
+        supportConsole: upsertRecord('cmdb_ci_business_app', {
             name: 'Neat Support Console',
             short_description: 'Internal support team case management system',
-            operational_status: '1',
-            product_type: 'digital_product'
+            operational_status: '1'
         })
     };
 
@@ -173,13 +170,13 @@
     gs.info('\n--- Creating Business Services ---');
 
     var businessServices = {
-        portalService: upsertRecord('cmdb_ci_service_discovered', {
+        portalService: upsertRecord('cmdb_ci_service', {
             name: 'Neat Customer Portal',
             short_description: 'Business service for customer self-service portal',
             operational_status: '1',
             service_classification: 'Business Service'
         }),
-        billingService: upsertRecord('cmdb_ci_service_discovered', {
+        billingService: upsertRecord('cmdb_ci_service', {
             name: 'Neat Billing & Payments',
             short_description: 'Business service for billing and payment processing',
             operational_status: '1',
@@ -224,7 +221,7 @@
     // ------------------------------------------------------------------------
     gs.info('\n--- Creating Technology Management Service ---');
 
-    var techMgmtService = upsertRecord('cmdb_ci_service_discovered', {
+    var techMgmtService = upsertRecord('cmdb_ci_service_technical', {
         name: 'Managed PostgreSQL',
         short_description: 'Managed PostgreSQL database service',
         operational_status: '1',
@@ -252,27 +249,30 @@
     };
 
     // ------------------------------------------------------------------------
-    // 7. SERVICE INSTANCES (Application Services / Runtime Instances)
+    // 7. APPLICATION SERVICES (Runtime Instances)
     // ------------------------------------------------------------------------
-    gs.info('\n--- Creating Service Instances ---');
+    gs.info('\n--- Creating Application Services ---');
 
     var serviceInstances = {
-        portalProd: upsertRecord('cmdb_ci_service_auto', {
+        portalProd: upsertRecord('cmdb_ci_service_discovered', {
             name: 'Portal – PROD',
             short_description: 'Production instance of customer portal',
             operational_status: '1',
+            service_classification: 'Application Service',
             environment: 'Production'
         }),
-        portalUAT: upsertRecord('cmdb_ci_service_auto', {
+        portalUAT: upsertRecord('cmdb_ci_service_discovered', {
             name: 'Portal – UAT',
             short_description: 'UAT instance of customer portal',
             operational_status: '1',
+            service_classification: 'Application Service',
             environment: 'Test'
         }),
-        billingProd: upsertRecord('cmdb_ci_service_auto', {
+        billingProd: upsertRecord('cmdb_ci_service_discovered', {
             name: 'Billing – PROD',
             short_description: 'Production instance of billing service',
             operational_status: '1',
+            service_classification: 'Application Service',
             environment: 'Production'
         })
     };
@@ -415,19 +415,20 @@
     gs.info('========================================');
     gs.info('\nSummary:');
     gs.info('- Business Capabilities: 4');
-    gs.info('- Digital Products: 3');
+    gs.info('- Business Applications: 3');
     gs.info('- Business Services: 2');
     gs.info('- Service Offerings (Business): 4');
     gs.info('- Technology Management Services: 1');
     gs.info('- Tech Service Offerings: 2');
-    gs.info('- Service Instances: 3');
+    gs.info('- Application Services: 3');
     gs.info('- Underpinning CIs: 6');
     gs.info('\nNavigate to:');
-    gs.info('- Business Capabilities: /nav_to.do?uri=business_capability_list.do');
-    gs.info('- Digital Products: /nav_to.do?uri=cmdb_ci_product_list.do');
-    gs.info('- Business Services: /nav_to.do?uri=cmdb_ci_service_discovered_list.do');
+    gs.info('- Business Capabilities: /nav_to.do?uri=cmdb_ci_business_capability_list.do');
+    gs.info('- Business Applications: /nav_to.do?uri=cmdb_ci_business_app_list.do');
+    gs.info('- Business Services: /nav_to.do?uri=cmdb_ci_service_list.do');
+    gs.info('- Technical Services: /nav_to.do?uri=cmdb_ci_service_technical_list.do');
     gs.info('- Service Offerings: /nav_to.do?uri=service_offering_list.do');
-    gs.info('- Service Instances: /nav_to.do?uri=cmdb_ci_service_auto_list.do');
+    gs.info('- Application Services: /nav_to.do?uri=cmdb_ci_service_discovered_list.do');
     gs.info('- Relationships: /nav_to.do?uri=cmdb_rel_ci_list.do');
     gs.info('========================================');
 
