@@ -139,7 +139,7 @@ for (var i = 0; i < NUMBER_OF_INCIDENTS; i++) {
     newRecord.opened_at = gdt.getDisplayValue();
     //  gs.debug("opened: "+days + " " + gdt)
     if (RESOLVED_ONLY) {
-        newRecord.state = 7;  //Closed for use with Automation Discovery
+        newRecord.state = 6;  //Closed for use with Automation Discovery
     } else {
         newRecord.state = Math.floor(Math.random() * 7) + 1; // 7;  // 6 - Resolved.       7 - Closed    
         //don't use unknown states and set it to In Progress
