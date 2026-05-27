@@ -146,11 +146,12 @@ var admin = getRecordSysId('sys_user', 'user_name', 'admin');
 var cmdb_ci_dell = getRecordSysId('cmdb_ci', 'name', 'Dell Wireless WLAN Utility');
 var cmdb_ci_sap = getRecordSysId('cmdb_ci', 'name', 'SAP AppSRV01');
 var cmdb_ci_email = getRecordSysId('cmdb_ci', 'name', 'EXCH-SD-05');
+
 var cmdb_ci_computer = getRecordSysId('cmdb_ci_computer', 'name', 'Apple - MacBook Pro 15" for Technical Staff');
 var cmdb_ci_service_email = getRecordSysId('cmdb_ci_service', 'name', 'Email');
 var cmdb_ci_service_erp = getRecordSysId('cmdb_ci_service', 'name', 'IT Services');
-var cmdb_ci_service_order = getRecordSysId('cmdb_ci_service', 'name', 'Order Status');
-var cmdb_ci_service_logistics = getRecordSysId('cmdb_ci_service', 'name', 'Logistics');
+var cmdb_ci_service_order = getRecordSysId('cmdb_ci_service', 'name', 'SAP Financial Accounting');
+var cmdb_ci_service_logistics = getRecordSysId('cmdb_ci_service', 'name', 'SAP Materials Management');
 
 // ============================================================================
 // INCIDENT TEMPLATES
