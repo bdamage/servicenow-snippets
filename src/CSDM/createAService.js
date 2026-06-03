@@ -4,6 +4,10 @@
  * Compatible with v4/v5 CSDM model
  *
  * Run as: Background Script in ServiceNow
+ *
+ * NOTE: For a config-driven version that lets you generate one service at a
+ * time by editing top-of-file VARs (DB name, PROD name, capability, etc.),
+ * see createServices.js in this folder.
  */
 
 (function () {
