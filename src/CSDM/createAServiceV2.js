@@ -54,7 +54,7 @@
 ║  LAYER 3 · MANAGE TECHNICAL SERVICES   ▼                                     ║
 ║  ┌─────────────────────────────────────┐                                     ║
 ║  │        Technical Service CI         │  cmdb_ci_service                    ║
-║  │       "Enterprise HR Portal"        │  Classification: Business Service   ║
+║  │       "Enterprise HR Portal"        │  Classification: Technical Service  ║
 ║  └───┬──────────────┬──────────────────┘  Used For: Production               ║
 ║      │              │                                                         ║
 ║      ▼              ▼                                                         ║
@@ -219,7 +219,11 @@ try {
 
     // ── STEP 5: Technical Service CI ──────────────────────────
     // CSDM Layer: Manage Technical Services
-    out('\n[5/15] Creating Technical (Business) Service CI (CSDM Manage Technical Services layer)...');
+    // NOTE: service_classification MUST be 'Technical Service' (not 'Business
+    // Service') — Digital Portfolio Management's Services view only surfaces
+    // Technical Services that have at least one service offering. A Business
+    // Service with offerings will not appear in DPM.
+    out('\n[5/15] Creating Technical Service CI (CSDM Manage Technical Services layer)...');
     var techSvcId = findOrCreate('cmdb_ci_service', 'name', CFG.serviceName, function (gr) {
         gr.setValue('short_description', 'Primary IT service delivering ' + CFG.serviceName + ' capabilities');
         gr.setValue('operational_status', '1');
@@ -227,9 +231,20 @@ try {
         gr.setValue('support_group', groupSysId);
         gr.setValue('busines_criticality', '1');
         gr.setValue('used_for', 'Production');
-        gr.setValue('service_classification', 'Business Service');
+        gr.setValue('service_classification', 'Technical Service');
     }, 'Technical Service');
     out('      Technical Service sys_id: ' + techSvcId);
+
+    // Reconcile: if this service already existed (e.g. created by an earlier run
+    // as a Business Service), correct its classification so it appears in DPM.
+    if (!CFG.dryRun && techSvcId) {
+        var grSvcFix = new GlideRecord('cmdb_ci_service');
+        if (grSvcFix.get(techSvcId) && grSvcFix.getValue('service_classification') != 'Technical Service') {
+            out('      [FIX] Re-classifying existing service from "' + grSvcFix.getValue('service_classification') + '" to "Technical Service" for DPM visibility');
+            grSvcFix.setValue('service_classification', 'Technical Service');
+            grSvcFix.update();
+        }
+    }
 
     // ── STEP 6: Service Offering ───────────────────────────────
     out('\n[6/15] Creating Service Offering (Standard tier)...');
